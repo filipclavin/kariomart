@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e464a004e50f79488d392dd13439d87, type: 3}
+  m_Name: GameData
+  m_EditorClassIdentifier: 
+  trackScenes:
+  - {fileID: 102900000, guid: dceac61963bb6ae4eb3c555b836e7874, type: 3}
+  - {fileID: 102900000, guid: c33aecc5eb50a634baafc944ed38c036, type: 3}
+  - {fileID: 102900000, guid: 661085debefa2b841916bb1b0266f8e3, type: 3}
+  mainMenuScene: {fileID: 102900000, guid: e572b0ac74e11a94290b034ad052a884, type: 3}
+  pauseMenuScene: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
