@@ -1,5 +1,5 @@
 {
-    "name": "PlayerActions",
+    "name": "PlayerOneActions",
     "maps": [
         {
             "name": "Car",
@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Respawn",
+                    "type": "Button",
+                    "id": "a3840882-7672-4261-8184-85f37f02eaa0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -156,6 +165,28 @@
                     "action": "Accelerate",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "cea43a77-9366-4d36-816c-a7549033776a",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Respawn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "18924cd4-a024-436b-9e7f-38a54fbcd225",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Respawn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

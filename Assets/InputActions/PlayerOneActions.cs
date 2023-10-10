@@ -44,6 +44,15 @@ public partial class @PlayerOneActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Respawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""a3840882-7672-4261-8184-85f37f02eaa0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -178,6 +187,28 @@ public partial class @PlayerOneActions: IInputActionCollection2, IDisposable
                     ""action"": ""Accelerate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cea43a77-9366-4d36-816c-a7549033776a"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Respawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18924cd4-a024-436b-9e7f-38a54fbcd225"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Respawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -395,6 +426,7 @@ public partial class @PlayerOneActions: IInputActionCollection2, IDisposable
         m_Car = asset.FindActionMap("Car", throwIfNotFound: true);
         m_Car_Accelerate = m_Car.FindAction("Accelerate", throwIfNotFound: true);
         m_Car_Turn = m_Car.FindAction("Turn", throwIfNotFound: true);
+        m_Car_Respawn = m_Car.FindAction("Respawn", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_TogglePause = m_UI.FindAction("TogglePause", throwIfNotFound: true);
@@ -465,12 +497,14 @@ public partial class @PlayerOneActions: IInputActionCollection2, IDisposable
     private List<ICarActions> m_CarActionsCallbackInterfaces = new List<ICarActions>();
     private readonly InputAction m_Car_Accelerate;
     private readonly InputAction m_Car_Turn;
+    private readonly InputAction m_Car_Respawn;
     public struct CarActions
     {
         private @PlayerOneActions m_Wrapper;
         public CarActions(@PlayerOneActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Accelerate => m_Wrapper.m_Car_Accelerate;
         public InputAction @Turn => m_Wrapper.m_Car_Turn;
+        public InputAction @Respawn => m_Wrapper.m_Car_Respawn;
         public InputActionMap Get() { return m_Wrapper.m_Car; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -486,6 +520,9 @@ public partial class @PlayerOneActions: IInputActionCollection2, IDisposable
             @Turn.started += instance.OnTurn;
             @Turn.performed += instance.OnTurn;
             @Turn.canceled += instance.OnTurn;
+            @Respawn.started += instance.OnRespawn;
+            @Respawn.performed += instance.OnRespawn;
+            @Respawn.canceled += instance.OnRespawn;
         }
 
         private void UnregisterCallbacks(ICarActions instance)
@@ -496,6 +533,9 @@ public partial class @PlayerOneActions: IInputActionCollection2, IDisposable
             @Turn.started -= instance.OnTurn;
             @Turn.performed -= instance.OnTurn;
             @Turn.canceled -= instance.OnTurn;
+            @Respawn.started -= instance.OnRespawn;
+            @Respawn.performed -= instance.OnRespawn;
+            @Respawn.canceled -= instance.OnRespawn;
         }
 
         public void RemoveCallbacks(ICarActions instance)
@@ -595,6 +635,7 @@ public partial class @PlayerOneActions: IInputActionCollection2, IDisposable
     {
         void OnAccelerate(InputAction.CallbackContext context);
         void OnTurn(InputAction.CallbackContext context);
+        void OnRespawn(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
