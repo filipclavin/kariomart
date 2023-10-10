@@ -63,6 +63,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5213441153663610794, guid: 4159160a7266c0c4dae010522d5a903a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2.115756
+      objectReference: {fileID: 0}
+    - target: {fileID: 5213441153663610794, guid: 4159160a7266c0c4dae010522d5a903a,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 4.905873
+      objectReference: {fileID: 0}
+    - target: {fileID: 5213441153663610794, guid: 4159160a7266c0c4dae010522d5a903a,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.0036699772
+      objectReference: {fileID: 0}
+    - target: {fileID: 5213441153663610794, guid: 4159160a7266c0c4dae010522d5a903a,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.15834165
+      objectReference: {fileID: 0}
+    - target: {fileID: 5213441153663610794, guid: 4159160a7266c0c4dae010522d5a903a,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 59c26edddf15ac244a42c40cfdf9265a,
+        type: 2}
     - target: {fileID: 5622747691775132983, guid: 4159160a7266c0c4dae010522d5a903a,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -119,7 +145,7 @@ PrefabInstance:
     - target: {fileID: 7710630768978242563, guid: 4159160a7266c0c4dae010522d5a903a,
         type: 3}
       propertyPath: m_Size.x
-      value: 2.1611974
+      value: 1.9962544
       objectReference: {fileID: 0}
     - target: {fileID: 7710630768978242563, guid: 4159160a7266c0c4dae010522d5a903a,
         type: 3}
@@ -129,12 +155,12 @@ PrefabInstance:
     - target: {fileID: 7710630768978242563, guid: 4159160a7266c0c4dae010522d5a903a,
         type: 3}
       propertyPath: m_Size.z
-      value: 4.924845
+      value: 4.7137175
       objectReference: {fileID: 0}
     - target: {fileID: 7710630768978242563, guid: 4159160a7266c0c4dae010522d5a903a,
         type: 3}
       propertyPath: m_Center.x
-      value: -0.00000011920929
+      value: 0.0032987595
       objectReference: {fileID: 0}
     - target: {fileID: 7710630768978242563, guid: 4159160a7266c0c4dae010522d5a903a,
         type: 3}
@@ -144,7 +170,7 @@ PrefabInstance:
     - target: {fileID: 7710630768978242563, guid: 4159160a7266c0c4dae010522d5a903a,
         type: 3}
       propertyPath: m_Center.z
-      value: -0.15127063
+      value: -0.17766142
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

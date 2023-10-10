@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,16 +6,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputActionAsset _playerActions;
     private InputAction _accelerateAction;
     private InputAction _turnAction;
-    private InputAction _respawnAction;
 
     private Rigidbody _rb;
 
-    [SerializeField] private float _speed;
-    [SerializeField] private float _turnSpeed;
-    
-    private bool _isGrounded = true;
-    private Vector3 _lastGroundedPos;
-    private Quaternion _lastGroundedRot;
+    [SerializeField] private float _accelerationForce;
+    [SerializeField] private float _maxVelocity;
+    [SerializeField] private float _turnForce;
+    [SerializeField] private float _maxAngularVelocity;
 
     // Start is called before the first frame update
     void Start()
@@ -24,28 +20,13 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _accelerateAction = _playerActions.FindActionMap("Car").FindAction("Accelerate");
         _turnAction = _playerActions.FindActionMap("Car").FindAction("Turn");
-        _respawnAction = _playerActions.FindActionMap("Car").FindAction("Respawn");
 
         _accelerateAction.Enable();
         _turnAction.Enable();
-        _respawnAction.Enable();
-
-        _respawnAction.performed += ctx =>
-        {
-            transform.position = _lastGroundedPos;
-            transform.rotation = _lastGroundedRot;
-            _rb.angularVelocity = Vector3.zero;
-            _rb.velocity = Vector3.zero;
-        };
     }
 
     private void Update()
     {
-        if (!_isGrounded)
-        {
-            return;
-        }
-
         float accDir = _accelerateAction.ReadValue<float>();
 
         if (accDir != 0)
@@ -62,7 +43,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Accelerate(float dir)
     {
-        _rb.AddForce(_speed * dir * transform.forward);
+        if (_rb.velocity.magnitude < _maxVelocity)
+        {
+            _rb.AddForce(_accelerationForce * dir * transform.forward);
+        }
+
+        if (_rb.velocity.magnitude > _maxVelocity)
+        {
+            _rb.velocity = _maxVelocity * _rb.velocity.normalized;
+        }
     }
 
     private void Turn(float dir)
@@ -74,38 +63,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         forwardScalar /= Mathf.Abs(forwardScalar);
-        
-        if (forwardScalar == 0)
+
+        _rb.AddTorque(_turnForce * dir * forwardScalar * Vector3.up);
+
+        if (_rb.angularVelocity.magnitude > _maxAngularVelocity)
         {
-            return;
-        }
-
-        _rb.AddTorque(_turnSpeed * dir * forwardScalar * Vector3.up);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        string cName = collision.gameObject.name;
-
-        if (cName.Contains("Barrier"))
-        {
-            _rb.angularVelocity = Vector3.zero;
-            _rb.velocity *= 0.5f;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        _isGrounded = false;
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (!_isGrounded && transform.up.y > 0)
-        {
-             _isGrounded = true;
-            _lastGroundedPos = transform.position;
-            _lastGroundedRot = transform.rotation;
+            _rb.angularVelocity = _maxAngularVelocity * _rb.angularVelocity.normalized;
         }
     }
 
@@ -113,6 +76,10 @@ public class PlayerMovement : MonoBehaviour
     {
         _accelerateAction.Disable();
         _turnAction.Disable();
-        _respawnAction.Disable();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        _rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 }
