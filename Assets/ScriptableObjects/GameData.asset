@@ -21,3 +21,8 @@ MonoBehaviour:
   goalTag: goal
   boostTag: boost
   checkpointTag: checkpoint
+  winUITag: winUI
+  winnerTMPTag: winnerTMP
+  timerTMPTag: timerTMP
+  trackPartTag: trackPart
+  playerCount: 1

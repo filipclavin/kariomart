@@ -24,15 +24,14 @@ public class PauseMenuManager : MonoBehaviour
     }
 
     private void TogglePause()
-    {
+    {   
+        Time.timeScale = !_pauseMenuCanvas.activeSelf ? 0f : 1f;
         _pauseMenuCanvas.SetActive(!_pauseMenuCanvas.activeSelf);
     }
 
     private void TogglePause(InputAction.CallbackContext context)
     {
-        _pauseMenuCanvas.SetActive(!_pauseMenuCanvas.activeSelf);
-
-        Time.timeScale = _pauseMenuCanvas.activeSelf ? 0f : 1f;
+        TogglePause();
     }
 
     private void OnDestroy()

@@ -7,6 +7,12 @@ TagManager:
   - goal
   - boost
   - checkpoint
+  - winnerTMP
+  - timerTMP
+  - winUI
+  - trackPart
+  - player1
+  - player2
   layers:
   - Default
   - TransparentFX

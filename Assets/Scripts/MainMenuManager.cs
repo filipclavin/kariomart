@@ -11,6 +11,8 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] private Button _menuButtonPrefab;
     [SerializeField] private float _buttonDistance;
+    [SerializeField] private Button _onePlayerButton;
+    [SerializeField] private Button _twoPlayerButton;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,21 @@ public class MainMenuManager : MonoBehaviour
         {
             pauseMenuManager.enabled = false;
         }
+
+        if (_gameData.playerCount == 1)
+        {
+            _onePlayerButton.Select();
+        } else
+        {
+            _twoPlayerButton.Select();
+        }
+
+        _onePlayerButton.onClick.AddListener(() => {
+            _gameData.playerCount = 1;
+        });
+        _twoPlayerButton.onClick.AddListener(() => {
+            _gameData.playerCount = 2;
+        });
 
         CreateMapButtons(_gameData.trackScenes);
     }

@@ -6,8 +6,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     [SerializeField] private GameData gameData;
 
-    public bool twoPlayerMode;
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -23,16 +21,13 @@ public class GameManager : MonoBehaviour
 
     public void LoadTrack(string trackName)
     {
-        // TODO: Add transition
-
         SceneManager.LoadScene(trackName);
         SceneManager.LoadScene(gameData.pauseMenuScene.name, LoadSceneMode.Additive);
     }
 
     public void LoadMainMenu()
     {
-        // TODO: Add transition
-
+        Time.timeScale = 1f;
         SceneManager.LoadScene(gameData.mainMenuScene.name);
     }
 

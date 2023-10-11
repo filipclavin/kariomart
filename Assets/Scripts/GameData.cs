@@ -12,6 +12,12 @@ public class GameData : ScriptableObject
     public string goalTag;
     public string boostTag;
     public string checkpointTag;
+    public string winUITag;
+    public string winnerTMPTag;
+    public string timerTMPTag;
+    public string trackPartTag;
+
+    public int playerCount;
 
     public Dictionary<string, int> raceProgress = new();
 }

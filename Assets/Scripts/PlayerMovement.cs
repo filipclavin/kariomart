@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _maxVelocity;
     [SerializeField] private float _turnForce;
     [SerializeField] private float _maxAngularVelocity;
+    [SerializeField] private int _boostDuration;
+
+    public bool _isBoosting;
 
     // Start is called before the first frame update
     void Start()
@@ -43,12 +47,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Accelerate(float dir)
     {
-        if (_rb.velocity.magnitude < _maxVelocity)
-        {
-            _rb.AddForce(_accelerationForce * dir * transform.forward);
-        }
+        _rb.AddForce(Time.deltaTime * _accelerationForce * dir * transform.forward);
 
-        if (_rb.velocity.magnitude > _maxVelocity)
+        if (!_isBoosting && _rb.velocity.magnitude > _maxVelocity)
         {
             _rb.velocity = _maxVelocity * _rb.velocity.normalized;
         }
@@ -64,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
         forwardScalar /= Mathf.Abs(forwardScalar);
 
-        _rb.AddTorque(_turnForce * dir * forwardScalar * Vector3.up);
+        _rb.AddTorque(Time.deltaTime * _turnForce * dir * forwardScalar * Vector3.up);
 
         if (_rb.angularVelocity.magnitude > _maxAngularVelocity)
         {
@@ -72,14 +73,23 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void Boost()
+    {
+        _isBoosting = true;
+        Task.Delay(_boostDuration).ContinueWith(t => _isBoosting = false);
+    }
+
     private void OnDestroy()
     {
-        _accelerateAction.Disable();
-        _turnAction.Disable();
+        _accelerateAction?.Disable();
+        _turnAction?.Disable();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        _rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        if (_rb != null)
+        {
+            _rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        }
     }
 }

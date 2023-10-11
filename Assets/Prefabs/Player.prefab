@@ -52,10 +52,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerActions: {fileID: 0}
-  _accelerationForce: 50
-  _maxVelocity: 100
-  _turnForce: 200
-  _maxAngularVelocity: 5
+  _accelerationForce: 10000
+  _maxVelocity: 50
+  _turnForce: 22000
+  _maxAngularVelocity: 3
+  _boostDuration: 2000
+  _isBoosting: 0
 --- !u!114 &1576479550874121881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4c5702b06779b54bb5a8eb52ad76851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameData: {fileID: 11400000, guid: 6086d9983e60b5c4f83b7a7c6749b385, type: 2}
+  _gameData: {fileID: 11400000, guid: 6086d9983e60b5c4f83b7a7c6749b385, type: 2}
 --- !u!54 &7639443502380399504
 Rigidbody:
   m_ObjectHideFlags: 0

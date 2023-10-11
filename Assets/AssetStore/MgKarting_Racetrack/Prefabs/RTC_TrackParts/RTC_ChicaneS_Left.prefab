@@ -167,6 +167,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: afd1d74e3de878743a2f474e3cc7c6c1,
+        type: 3}
+      propertyPath: m_TagString
+      value: trackPart
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

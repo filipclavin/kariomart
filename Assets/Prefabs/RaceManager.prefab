@@ -44,3 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d8c144c8a34ed4a82f0a4056181c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameData: {fileID: 11400000, guid: 6086d9983e60b5c4f83b7a7c6749b385, type: 2}
+  _laps: 1
+  _boostPrefab: {fileID: 5960676787658604222, guid: e20da386b0e92be4abae1b3351bf3d59,
+    type: 3}
+  _boostSpawnChance: 0.25
+  _maxBoostAmount: 10
+  _boostSpawnInterval: 10
