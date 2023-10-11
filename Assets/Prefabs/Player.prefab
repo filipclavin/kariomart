@@ -57,7 +57,6 @@ MonoBehaviour:
   _turnForce: 22000
   _maxAngularVelocity: 3
   _boostDuration: 2000
-  _isBoosting: 0
 --- !u!114 &1576479550874121881
 MonoBehaviour:
   m_ObjectHideFlags: 0

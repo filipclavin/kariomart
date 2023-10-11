@@ -24,7 +24,7 @@ public class PauseMenuManager : MonoBehaviour
     }
 
     private void TogglePause()
-    {   
+    {
         Time.timeScale = !_pauseMenuCanvas.activeSelf ? 0f : 1f;
         _pauseMenuCanvas.SetActive(!_pauseMenuCanvas.activeSelf);
     }

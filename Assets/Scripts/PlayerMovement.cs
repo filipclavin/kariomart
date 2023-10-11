@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,7 +17,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _maxAngularVelocity;
     [SerializeField] private int _boostDuration;
 
-    public bool _isBoosting;
+    private bool _isBoosting;
+    private CancellationTokenSource _boostTokenSource;
 
     // Start is called before the first frame update
     void Start()
@@ -73,10 +75,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void Boost()
+    public async void Boost()
     {
         _isBoosting = true;
-        Task.Delay(_boostDuration).ContinueWith(t => _isBoosting = false);
+
+        if (_boostTokenSource != null)
+        {
+            _boostTokenSource.Cancel();
+            _boostTokenSource.Dispose();
+        }
+
+        _boostTokenSource = new();
+
+        try
+        {
+            await Task.Delay(_boostDuration, _boostTokenSource.Token);
+            _isBoosting = false;
+        }
+        catch { }
     }
 
     private void OnDestroy()
